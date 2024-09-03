@@ -29,11 +29,12 @@ module tut3_verilog_regincr_RegIncr
     else
       reg_out <= in_;
   end
-
-  // ''' TUTORIAL TASK '''''''''''''''''''''''''''''''''''''''''''''''''''
-  // This model is incomplete. As part of the tutorial you will insert
-  // combinational logic here to model the incrementer logic.
-  // '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  
+  logic [7:0] adder_out;
+  always_comb begin
+    adder_out = reg_out + 1;
+  end
+  assign out = adder_out;
 
   // You will need to uncomment this when you explore line tracing.
   //
