@@ -16,7 +16,7 @@ from pymtl3.passes.backends.verilog import *
 
 from sys     import argv
 from RegIncr import RegIncr
-
+import random
 # Get list of input values from command line
 
 input_values = [ int(x,0) for x in argv[1:] ]
@@ -24,17 +24,19 @@ input_values = [ int(x,0) for x in argv[1:] ]
 # Add three zero values to end of list of input values
 
 input_values.extend( [0]*3 )
-
-# ''' TUTORIAL TASK ''''''''''''''''''''''''''''''''''''''''''''''''''''''
-# This simulator script is incomplete. As part of the tutorial you will
-# insert code here for constructing and elaborating a RegIncr model.
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+# My input values
+# input_values = list(range(0x00, 0x100))
+# random.shuffle(input_values)
+print(input_values)
+#  Instantiate and elaborate the model
+model = RegIncr()
+model.elaborate()
 
 # Apply the Verilog import passes and the default pass group
 
 model.apply( VerilogPlaceholderPass() )
 model = VerilogTranslationImportPass()( model )
-model.apply( DefaultPassGroup() )
+model.apply( DefaultPassGroup(textwave=True) )
 
 # Reset simulator
 
@@ -54,6 +56,6 @@ for input_value in input_values:
   print( f" cycle = {model.sim_cycle_count()}: in = {model.in_}, out = {model.out}" )
 
   # Tick simulator one cycle
-
+  model.print_textwave()
   model.sim_tick()
 
