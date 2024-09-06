@@ -36,8 +36,8 @@ model.elaborate()
 
 model.apply( VerilogPlaceholderPass() )
 model = VerilogTranslationImportPass()( model )
-model.apply( DefaultPassGroup(textwave=True) )
-
+# model.apply( DefaultPassGroup(textwave=True) )
+model.apply( DefaultPassGroup(vcdwave="regincr-adhoc-test") )
 # Reset simulator
 
 model.sim_reset()
@@ -56,6 +56,6 @@ for input_value in input_values:
   print( f" cycle = {model.sim_cycle_count()}: in = {model.in_}, out = {model.out}" )
 
   # Tick simulator one cycle
-  model.print_textwave()
+  # model.print_textwave()
   model.sim_tick()
 

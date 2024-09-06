@@ -33,6 +33,8 @@ module tut3_verilog_regincr_RegIncr
   reg [7:0] adder_out;
   always @(*) begin
     adder_out = reg_out + 1;
+    //  Task "To do on my own"
+    //adder_out = reg_out + 2;
   end
   assign out = adder_out;
 
